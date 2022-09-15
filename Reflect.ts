@@ -680,8 +680,11 @@ namespace Reflect {
         const _Set: typeof Set = !usePolyfill && typeof Set === "function" && typeof Set.prototype.entries === "function" ? Set : CreateSetPolyfill();
         const _WeakMap: typeof WeakMap = !usePolyfill && typeof WeakMap === "function" ? WeakMap : CreateWeakMapPolyfill();
 
-        // [[Metadata]] internal slot
-        // https://rbuckton.github.io/reflect-metadata/#ordinary-object-internal-methods-and-internal-slots
+        /**
+         * [[Metadata]] 内部插槽 - 看起来存储了被装饰“对象”=>metadata的对应关系？ 
+         * [[Metadata]] internal slot
+         * https://rbuckton.github.io/reflect-metadata/#ordinary-object-internal-methods-and-internal-slots
+         */
         const Metadata = new _WeakMap<any, Map<string | symbol | undefined, Map<any, any>>>();
 
         function decorate(decorators: ClassDecorator[], target: Function): Function;
